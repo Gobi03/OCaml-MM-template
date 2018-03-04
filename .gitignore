@@ -1,0 +1,26 @@
+/src/submit.ml
+*.out
+
+# OCaml
+*.annot
+*.cmo
+*.cma
+*.cmi
+*.cmt
+*.cmti
+*.a
+*.o
+*.cmx
+*.cmxs
+*.cmxa
+
+# ocamlbuild working directory
+_build/
+
+# ocamlbuild targets
+*.byte
+*.native
+
+# oasis generated files
+setup.data
+setup.log

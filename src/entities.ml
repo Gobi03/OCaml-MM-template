@@ -1,0 +1,2 @@
+type hoge = Hoge
+
