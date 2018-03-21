@@ -1,11 +1,12 @@
 OCAMLC   = ocamlfind ocamlc
 OCAMLDEP = ocamlfind ocamldep
 
-OBJS = entities.cmo main.cmo
+OBJS = entities.cmi entities.cmo \
+	main.cmi main.cmo
 
 .PHONY: all
 all: ${OBJS}
-	${OCAMLC} -o a.out $^
+	${OCAMLC} -o a.out $(filter-out %.cmi,$^)
 
 # make submit file
 .PHONY: submit
