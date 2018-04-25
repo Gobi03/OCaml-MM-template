@@ -25,11 +25,11 @@ submit:
 # Clean up
 .PHONY: clean
 clean:
-	${RM} `find -name "*.cm[ioxat]" -or -name "*.cmti" -or -name "*.out"`
+	${RM} *.cm[ioxat] *.cmti *.out
 
 # Dependencies
 .PHONY: depend
 depend:
-	$(OCAMLDEP) `find -name "*.mli" -or -name "*.ml"` > .depend
+	$(OCAMLDEP) *.mli *.ml > .depend
 
 include .depend
