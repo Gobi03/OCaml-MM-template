@@ -11,7 +11,7 @@ all: ${OBJS}
 # make submit file
 .PHONY: submit
 submit:
-	./make-submit.sh
+	./make-submit-file.py
 
 # Common rules
 .SUFFIXES: .ml .mli .cmi .cmo

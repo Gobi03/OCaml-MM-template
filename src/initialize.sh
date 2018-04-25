@@ -1,3 +1,3 @@
 touch .depend
 make depend
-chmod 755 make-submit.sh
+chmod 755 make-submit-file.py
