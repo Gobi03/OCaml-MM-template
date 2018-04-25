@@ -1,2 +1,3 @@
-type hoge = Hoge
+open Common
+
 

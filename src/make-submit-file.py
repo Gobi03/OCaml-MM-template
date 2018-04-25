@@ -9,7 +9,7 @@ submit_file = open(submit_file_name, 'x')
 
 
 # generate file
-code_files = ['entities']
+code_files = ['common', 'entities']
 
 for cf in code_files:
     fl = open(cf + '.ml', 'r')

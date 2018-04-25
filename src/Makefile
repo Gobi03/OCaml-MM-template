@@ -1,7 +1,8 @@
 OCAMLC   = ocamlfind ocamlc
 OCAMLDEP = ocamlfind ocamldep
 
-OBJS = entities.cmi entities.cmo \
+OBJS = common.cmi common.cmo \
+	entities.cmi entities.cmo \
 	main.cmi main.cmo
 
 .PHONY: all
