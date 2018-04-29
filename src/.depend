@@ -1,6 +1,0 @@
-common.cmo :
-common.cmx :
-entities.cmo : common.cmo
-entities.cmx : common.cmx
-main.cmo : entities.cmo common.cmo
-main.cmx : entities.cmx common.cmx

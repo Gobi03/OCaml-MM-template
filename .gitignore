@@ -25,3 +25,9 @@ _build/
 # oasis generated files
 setup.data
 setup.log
+
+# OMakefile
+*.opt
+*.omc
+.omakedb
+.omakedb.lock
