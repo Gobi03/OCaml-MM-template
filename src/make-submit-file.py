@@ -14,7 +14,7 @@ code_files = ['common', 'entities']
 for cf in code_files:
     fl = open(cf + '.ml', 'r')
     text = (
-        "module {} = struct".format(cf.capitalize()),
+        "module {} = struct".format(cf[0].upper() + cf[1:]),
         fl.read(),
         "end"
     )
