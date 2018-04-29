@@ -1,5 +1,6 @@
 /src/submit.ml
 *.out
+.#*
 
 # OCaml
 *.annot
