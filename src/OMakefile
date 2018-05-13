@@ -89,7 +89,8 @@ PROGRAM = a.out
 
 
 clean:
-	$(RM) *.cm[ioxat] *.cmti *.out *.opt *.o
+	find . -name "*.cm[ioxat]*" -o -name "*.out" -o -name "*.opt" -o -name "*.[ao]" \
+	| xargs $(RM)
 
 submit:
 	./make-submit-file.py
