@@ -11,7 +11,7 @@ $ bash initialize.sh
 
 ## ビルド
 ```shell
-src/ $ omake
+$ omake
 ```
 
 ファイルを足した場合は、[OMakefile](./src/OMakefile) の `FILES[]` にファイル名を追加。
@@ -20,6 +20,6 @@ src/ $ omake
 [src/make-submit-file.py](src/make-submit-file.py) の `code_files` に依存順にファイル名をファイル修飾子無しでセットし、
 
 ```shell
-src/ $ make submit
+$ omake submit
 ```
 を実行すると、`submit.ml` が生成される。
