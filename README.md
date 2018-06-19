@@ -22,4 +22,4 @@ $ omake
 ```shell
 $ omake submit
 ```
-を実行すると、`submit.ml` が生成される。
+を実行すると、`submit.ml` が生成されて、ついでにクリップボードにその中身が貼っつけられる。
