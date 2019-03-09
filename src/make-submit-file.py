@@ -8,12 +8,25 @@ if os.path.exists(submit_file_name):
 submit_file = open(submit_file_name, 'x')
 
 
-# generate file
-code_files = ([
-    'common',
-    'entities'
-])
+# get generate-object-file from OMakefile
+code_files = []
+try:
+    file = open("./OMakefile")
+    flag = False
+    for line in file.readlines():
+        if flag:
+            line = line.strip()
+            if line != "":
+                code_files.append(line)
+            else:
+                break
+        elif line.strip() == "FILES[] =":
+            flag = True
+finally:
+    file.close()
 
+
+# write out submit.ml
 for cf in code_files:
     fl = open(cf + '.ml', 'r')
     text = (

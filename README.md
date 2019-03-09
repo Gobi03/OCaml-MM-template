@@ -11,8 +11,6 @@ $ omake
 ファイルを足した場合は、[OMakefile](./src/OMakefile) の `FILES[]` にファイル名を追加。
 
 ## 提出ファイルの生成
-[src/make-submit-file.py](src/make-submit-file.py) の `code_files` に依存順にファイル名をファイル修飾子無しでセットし、
-
 ```shell
 $ omake submit
 ```
