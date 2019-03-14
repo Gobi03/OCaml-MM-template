@@ -74,6 +74,11 @@ USE_OCAMLFIND = true
 #
 
 FILES[] =
+	option
+	nel
+	extList
+	extStr
+	extSet
 	common
 	entities
 	main
