@@ -32,3 +32,6 @@ setup.log
 *.omc
 .omakedb
 .omakedb.lock
+
+# merlin
+*.cache
