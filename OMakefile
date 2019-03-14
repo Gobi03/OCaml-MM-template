@@ -1,1 +1,7 @@
-.SUBDIRS: src
+.SUBDIRS: src test
+
+if $(not $(OCAMLFIND_EXISTS))
+   eprintln(This project requires ocamlfind, but is was not found.)
+   eprintln(You need to install ocamlfind and run "omake --configure".)
+   exit 1
+
