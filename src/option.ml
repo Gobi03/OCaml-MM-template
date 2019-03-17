@@ -40,3 +40,7 @@ let fold: ('a -> 'b -> 'a) -> 'a -> 'b option -> 'a = fun f acc -> function
 let show: ('a -> string) -> 'a option -> string = fun f -> function
   | None -> "None"
   | Some a -> "Some " ^ f a
+
+let to_list: 'a option -> 'a list = function
+  | None -> []
+  | Some x -> [x]

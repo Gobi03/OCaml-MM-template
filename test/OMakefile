@@ -1,13 +1,16 @@
 # test/OMakefile
 
-.PHONY: all clean check
+.PHONY: all clean test
 OCAMLINCLUDES += ../src
 
 USE_OCAMLFIND = true
 
 # Build an OCaml program
 FILES[] =
-	option_test
+	testUtil
+	option_spec
+	extList_spec
+	extStr_spec
 
 OCAMLPACKS[] =
 	oUnit
@@ -27,5 +30,5 @@ clean:
 	find . -name "*.cm[ioxat]*" -o -name "*.out" -o -name "*.opt" -o -name "*.[ao]" \
 	| xargs $(RM)
 
-check: all
+test: all
 	./$(PROGRAM)

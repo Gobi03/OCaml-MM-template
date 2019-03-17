@@ -35,3 +35,6 @@ setup.log
 
 # merlin
 *.cache
+
+# OUnit
+*.log

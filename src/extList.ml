@@ -23,16 +23,16 @@ let hd_or_error: string -> 'a list -> 'a = fun errmsg -> function
   | hd :: _ -> hd
 
 (* 第一引数と一致する値を全てリストから削除 *)
-let drop: 'a -> 'a list -> 'a list = fun ele lst ->
-  List.filter ((<>) ele) lst
+let drop: ('a -> bool) -> 'a list -> 'a list = fun p lst ->
+  List.filter (fun e -> not (p e)) lst
 
 (* 第一引数と一致する先頭の値を削除 *)
 (* 一致する値が１つも無ければ何もしない *)
-let drop_one: 'a -> 'a list -> 'a list = fun ele lst ->
+let drop_one: ('a -> bool) -> 'a list -> 'a list = fun p lst ->
   let rec func acc = function
     | [] -> List.rev acc
     | hd :: rest ->
-      if hd = ele then (List.rev acc) @ rest
+      if p hd then (List.rev acc) @ rest
       else func (hd :: acc) rest
   in func [] lst
 
@@ -41,3 +41,20 @@ let show: ('a -> string) -> 'a list -> string = fun show_elem lst ->
   |> List.map show_elem
   |> String.concat "; "
   |> Printf.sprintf "[%s]"
+
+let count: ('a -> bool) -> 'a list -> int = fun p lst ->
+  List.fold_left (fun acc ele -> acc + if p ele then 1 else 0) 0 lst
+
+
+(* 多重集合と考えて差集合を取る *)
+(* O(NlogN) *)
+let diff: ('a -> 'a -> int) -> 'a list -> 'a list -> 'a list = fun compare l1 l2 ->
+  let rec func acc l1 l2 =
+    match (l1, l2) with
+    | (([], rest) | (rest, [])) -> acc @ rest
+    | (h1 :: rest1, h2 :: rest2) ->
+      if h1 = h2 then func acc rest1 rest2
+      else if compare h1 h2 < 0
+      then func (h1 :: acc) rest1 (h2::rest2)
+      else func (h2 :: acc) (h1::rest1) rest2
+  in func [] (List.sort compare l1) (List.sort compare l2)
