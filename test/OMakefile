@@ -11,6 +11,7 @@ FILES[] =
 	option_spec
 	extList_spec
 	extStr_spec
+	extSet_spec
 
 OCAMLPACKS[] =
 	oUnit
