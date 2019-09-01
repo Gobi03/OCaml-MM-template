@@ -85,6 +85,14 @@ let diff_test =
         assert_equal_intlist [2; 4] (diff compare [1; 3; 2; 1] [3; 1; 4; 1]) )
   ]
 
+let range_test =
+  "range" >::: [
+      ("[bg, ed)のリストを作る" >::
+         fun _ -> assert_equal_intlist [2; 3; 4] (range (2, 5)))
+    ;
+      ("(bg >= ed) の時、空リストが返る" >::
+         fun _ -> assert_equal_intlist [] (range (4, 2)))
+    ]
 
 
 
@@ -100,5 +108,6 @@ let _ = run_test_tt_main begin
       drop_one_test;
       count_test;
       diff_test;
+      range_test;
     ]
   end

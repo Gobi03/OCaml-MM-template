@@ -58,3 +58,12 @@ let diff: ('a -> 'a -> int) -> 'a list -> 'a list -> 'a list = fun compare l1 l2
       then func (h1 :: acc) rest1 (h2::rest2)
       else func (h2 :: acc) (h1::rest1) rest2
   in func [] (List.sort compare l1) (List.sort compare l2)
+
+(* [bg, ed) のリストを作る *)
+let range: (int * int) -> int list = fun (bg, ed) ->
+  let rec func i acc =
+    if i < bg then
+      acc
+    else
+      func (i-1) (i :: acc)
+  in func (ed-1) []
