@@ -22,6 +22,10 @@ let hd_or_error: string -> 'a list -> 'a = fun errmsg -> function
   | [] -> failwith errmsg
   | hd :: _ -> hd
 
+(* p に該当する最も末尾に近い値を返す *)
+let get_opt: ('a -> bool) -> 'a list -> 'a option = fun p lst ->
+  List.fold_left (fun acc x -> if p x then Some x else acc) None lst
+
 (* 第一引数と一致する値を全てリストから削除 *)
 let drop: ('a -> bool) -> 'a list -> 'a list = fun p lst ->
   List.filter (fun e -> not (p e)) lst

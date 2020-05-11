@@ -57,6 +57,17 @@ let hd_or_else_test =
         assert_equal_int 42 (hd_or_else 42 []) )
   ]
 
+let get_opt_test =
+  "get_opt" >::: [
+    ("p に該当する値を返す" >:: fun _ ->
+        assert_equal_intopt (Some 2) (get_opt ((=) 2) [1; 2; 3]) )
+    ;
+    ("p に該当する値が無い場合 None を返す" >:: fun _ ->
+        assert_equal_intopt None (get_opt ((=) 42) [1; 2; 3]) )
+    ;
+    ("p に該当する値が複数ある場合、最も末尾に近い値を返す" >:: fun _ ->
+        assert_equal_intopt (Some 3) (get_opt (fun n -> n >= 0) [1; 2; 3]) )
+  ]
 
 let drop_test =
   "drop" >::: [
@@ -104,6 +115,7 @@ let _ = run_test_tt_main begin
       contains_test;
       hd_opt_test;
       hd_or_else_test;
+      get_opt_test;
       drop_test;
       drop_one_test;
       count_test;
