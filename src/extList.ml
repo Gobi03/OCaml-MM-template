@@ -22,9 +22,9 @@ let hd_or_error: string -> 'a list -> 'a = fun errmsg -> function
   | [] -> failwith errmsg
   | hd :: _ -> hd
 
-(* p に該当する最も末尾に近い値を返す *)
+(* p に該当する最も先頭の値を返す *)
 let get_opt: ('a -> bool) -> 'a list -> 'a option = fun p lst ->
-  List.fold_left (fun acc x -> if p x then Some x else acc) None lst
+  List.fold_left (fun acc x -> if p x then Some x else acc) None (List.rev lst)
 
 (* 第一引数と一致する値を全てリストから削除 *)
 let drop: ('a -> bool) -> 'a list -> 'a list = fun p lst ->
@@ -39,6 +39,11 @@ let drop_one: ('a -> bool) -> 'a list -> 'a list = fun p lst ->
       if p hd then (List.rev acc) @ rest
       else func (hd :: acc) rest
   in func [] lst
+
+(* p に該当する最も先頭の値を取り出す *)
+let take_out: ('a -> bool) -> 'a list -> ('a option * 'a list) = fun p lst ->
+  (get_opt p lst, drop_one p lst)
+
 
 let show: ('a -> string) -> 'a list -> string = fun show_elem lst ->
   lst
@@ -66,8 +71,6 @@ let diff: ('a -> 'a -> int) -> 'a list -> 'a list -> 'a list = fun compare l1 l2
 (* [bg, ed) のリストを作る *)
 let range: (int * int) -> int list = fun (bg, ed) ->
   let rec func i acc =
-    if i < bg then
-      acc
-    else
-      func (i-1) (i :: acc)
+    if i < bg then acc
+    else func (i-1) (i :: acc)
   in func (ed-1) []

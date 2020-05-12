@@ -65,8 +65,8 @@ let get_opt_test =
     ("p に該当する値が無い場合 None を返す" >:: fun _ ->
         assert_equal_intopt None (get_opt ((=) 42) [1; 2; 3]) )
     ;
-    ("p に該当する値が複数ある場合、最も末尾に近い値を返す" >:: fun _ ->
-        assert_equal_intopt (Some 3) (get_opt (fun n -> n >= 0) [1; 2; 3]) )
+    ("p に該当する値が複数ある場合、最も先頭の値を返す" >:: fun _ ->
+        assert_equal_intopt (Some 1) (get_opt (fun n -> n >= 0) [1; 2; 3]) )
   ]
 
 let drop_test =
@@ -83,6 +83,18 @@ let drop_one_test =
     ("一致する値が１つも無ければ何もしない" >:: fun _ ->
         assert_equal_intlist [1; 3; 4] (drop_one (fun x -> x = 2) [1; 3; 4]) )
   ]
+
+let take_out_test =
+  "get_opt" >::: [
+    ("p に該当する値を取り出す" >:: fun _ ->
+        assert_equal_intoptintlist (Some 2, [1; 3]) (take_out ((=) 2) [1; 2; 3]) )
+    ;
+    ("p に該当する値が無い場合 None を返す" >:: fun _ ->
+        assert_equal_intoptintlist (None, [1; 2; 3]) (take_out ((=) 42) [1; 2; 3]) )
+    ;
+    ("p に該当する値が複数ある場合、最も先頭の値を返す" >:: fun _ ->
+        assert_equal_intoptintlist (Some 1, [2; 3]) (take_out (fun n -> n >= 0) [1; 2; 3]) )
+  ] 
 
 let count_test =
   "count" >::: [
@@ -118,6 +130,7 @@ let _ = run_test_tt_main begin
       get_opt_test;
       drop_test;
       drop_one_test;
+      take_out_test;
       count_test;
       diff_test;
       range_test;
