@@ -15,7 +15,6 @@ let nel_of_list_test =
     (* TODO: 空リストが渡ったケースのテスト *)
   ]
 
-
 let hd_test =
   "hd" >::: [
     ("先頭要素を返す" >:: fun _ ->
@@ -34,13 +33,43 @@ let last_test =
         assert_equal_int 1 (last @@ nel_of_list [1]) )
   ]
 
+let create_test =
+  "nel_of_list" >::: [
+    ("複数要素" >:: fun _ ->
+        assert_equal (Cons(1, Cons(2, Last 3))) (create [1; 2] 3) )
+    ;
+    ("単一要素" >:: fun _ ->
+        assert_equal (Last 1) (create [] 1) )
+  ]
 
-(* TODO: まだ作ってないテストがままある *)
+let rev_test =
+  "nel_of_list" >::: [
+    ("複数要素" >:: fun _ ->
+        assert_equal (Cons(3, Cons(2, Last 1))) (rev @@ nel_of_list [1; 2; 3]) )
+    ;
+    ("単一要素" >:: fun _ ->
+        assert_equal (Last 1) (rev @@ nel_of_list [1]) )
+  ]
+
+let find_test =
+  "nel_of_list" >::: [
+    ("条件にマッチする値を返す" >:: fun _ ->
+        assert_equal_intopt (Some 2) (find (fun x -> x = 2) (nel_of_list [1; 2; 3])) )
+    ;
+    ("条件にマッチする先頭の値を返す" >:: fun _ ->
+        assert_equal_intopt (Some 1) (find (fun x -> x mod 2 = 1) (nel_of_list [1; 2; 3])) )
+    ;
+    ("条件にマッチする値が無い場合 None を返す" >:: fun _ ->
+        assert_equal_intopt None (find (fun x -> x = 4) (nel_of_list [1; 2; 3])) )
+  ]
 
 let _ = run_test_tt_main begin
     "nel.ml" >::: [
       nel_of_list_test;
       hd_test;
       last_test;
+      create_test;
+      rev_test;
+      find_test;
     ]
   end
