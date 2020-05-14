@@ -33,6 +33,18 @@ let last_test =
         assert_equal_int 1 (last @@ nel_of_list [1]) )
   ]
 
+let fold_left_test =
+  "fold_left" >::: []
+
+let length_test =
+  "length" >::: [
+    ("複数要素" >:: fun _ ->
+        assert_equal_int 3 (length @@ nel_of_list [1; 2; 3]) )
+    ;
+    ("単一要素" >:: fun _ ->
+        assert_equal_int 1 (length @@ nel_of_list [1]) )
+  ]
+
 let create_test =
   "nel_of_list" >::: [
     ("複数要素" >:: fun _ ->
@@ -68,6 +80,8 @@ let _ = run_test_tt_main begin
       nel_of_list_test;
       hd_test;
       last_test;
+      fold_left_test;
+      length_test;
       create_test;
       rev_test;
       find_test;
