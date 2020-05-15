@@ -24,16 +24,21 @@ let fold_left: ('a -> 'b -> 'a) -> 'a -> 'b t -> 'a = fun f ->
 
 let length: _ t -> int = fun nel -> fold_left (fun acc _ -> acc + 1) 0 nel
 
-(* 第二引数を末尾につける *)
-let create: 'a list -> 'a -> 'a t = fun lst last ->
-  List.fold_right (fun next acc -> Cons (next, acc)) lst (Last last)
-
 let rev: 'a t -> 'a t = function
   | Last last -> Last last
   | Cons (hd, rest) -> fold_left (fun acc e -> Cons (e, acc)) (Last hd) rest
+
+let map: ('a -> 'b) -> 'a t -> 'b t = fun f nel ->
+  match nel with
+  | Last e -> Last (f e)
+  | Cons (hd, rest) -> rev @@ fold_left (fun acc e -> Cons (f e, acc)) (Last (f hd)) rest
 
 (* 述語 p を満たす先頭の要素を返す *)
 let rec find: ('a -> bool) -> 'a t -> 'a option = fun p nlst ->
   match nlst with
   | Last last -> if p last then Some last else None
   | Cons (hd, rest) -> if p hd then Some hd else find p rest
+
+(* 第二引数を末尾につける *)
+let create: 'a list -> 'a -> 'a t = fun lst last ->
+  List.fold_right (fun next acc -> Cons (next, acc)) lst (Last last)

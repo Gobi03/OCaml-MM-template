@@ -45,15 +45,6 @@ let length_test =
         assert_equal_int 1 (length @@ nel_of_list [1]) )
   ]
 
-let create_test =
-  "nel_of_list" >::: [
-    ("複数要素" >:: fun _ ->
-        assert_equal (Cons(1, Cons(2, Last 3))) (create [1; 2] 3) )
-    ;
-    ("単一要素" >:: fun _ ->
-        assert_equal (Last 1) (create [] 1) )
-  ]
-
 let rev_test =
   "nel_of_list" >::: [
     ("複数要素" >:: fun _ ->
@@ -62,6 +53,16 @@ let rev_test =
     ("単一要素" >:: fun _ ->
         assert_equal (Last 1) (rev @@ nel_of_list [1]) )
   ]
+
+let map_test =
+  "map" >::: [
+    ("複数要素" >:: fun _ ->
+        assert_equal (Cons(2, Cons(3, Last 4))) (map ((+) 1) @@ nel_of_list [1; 2; 3]) )
+    ;
+    ("単一要素" >:: fun _ ->
+        assert_equal (Last 2) (map ((+) 1) @@ nel_of_list [1]) )
+  ]
+
 
 let find_test =
   "nel_of_list" >::: [
@@ -75,6 +76,16 @@ let find_test =
         assert_equal_intopt None (find (fun x -> x = 4) (nel_of_list [1; 2; 3])) )
   ]
 
+let create_test =
+  "nel_of_list" >::: [
+    ("複数要素" >:: fun _ ->
+        assert_equal (Cons(1, Cons(2, Last 3))) (create [1; 2] 3) )
+    ;
+    ("単一要素" >:: fun _ ->
+        assert_equal (Last 1) (create [] 1) )
+  ]
+
+
 let _ = run_test_tt_main begin
     "nel.ml" >::: [
       nel_of_list_test;
@@ -82,8 +93,9 @@ let _ = run_test_tt_main begin
       last_test;
       fold_left_test;
       length_test;
-      create_test;
       rev_test;
+      map_test;
       find_test;
+      create_test;
     ]
   end
