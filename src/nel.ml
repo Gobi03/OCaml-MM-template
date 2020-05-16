@@ -70,3 +70,6 @@ let filter: ('a -> bool) -> 'a t -> 'a list = fun p nel ->
 (* 第二引数を末尾につける *)
 let create: 'a list -> 'a -> 'a t = fun lst last ->
   List.fold_right (fun next acc -> Cons (next, acc)) lst (Last last)
+
+let to_list: 'a t -> 'a list = fun nel ->
+  List.rev @@ fold_left (fun acc e -> e :: acc) [] nel

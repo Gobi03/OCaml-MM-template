@@ -148,6 +148,15 @@ let create_test =
         assert_equal (Last 1) (create [] 1) )
   ]
 
+let to_list_test =
+  "to_list" >::: [
+    ("複数要素" >:: fun _ ->
+        assert_equal_intlist [1; 2; 3] (to_list @@ nel_of_list [1; 2; 3]) )
+    ;
+    ("単一要素" >:: fun _ ->
+        assert_equal_intlist [1] (to_list @@ nel_of_list [1]) )
+  ]
+  
 
 let _ = run_test_tt_main begin
     "nel.ml" >::: [
@@ -166,5 +175,6 @@ let _ = run_test_tt_main begin
       find_test;
       filter_test;
       create_test;
+      to_list_test;
     ]
   end
