@@ -33,9 +33,9 @@ let list_flatten: 'a option list -> 'a list = fun lst ->
   |> List.map (function None -> [] | Some x -> [x])
   |> List.concat
 
-let fold: ('a -> 'b -> 'a) -> 'a -> 'b option -> 'a = fun f acc -> function
-  | None -> acc
-  | Some v -> f acc v
+let fold: 'a -> ('b -> 'a) -> 'b option -> 'a = fun default f -> function
+  | None -> default
+  | Some v -> f v
 
 let show: ('a -> string) -> 'a option -> string = fun f -> function
   | None -> "None"
