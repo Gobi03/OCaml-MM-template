@@ -2,7 +2,7 @@ exception EmptyList
 
 type 'a t = Last of 'a | Cons of 'a * 'a t
 
-let nel_of_list: 'a list -> 'a t = fun lst ->
+let of_list: 'a list -> 'a t = fun lst ->
   match List.rev lst with
   | [] -> raise EmptyList
   | hd :: rest -> List.fold_left (fun acc next -> Cons (next, acc)) (Last hd) rest
@@ -73,3 +73,19 @@ let create: 'a list -> 'a -> 'a t = fun lst last ->
 
 let to_list: 'a t -> 'a list = fun nel ->
   List.rev @@ fold_left (fun acc e -> e :: acc) [] nel
+
+let sort: ('a -> 'a -> int) -> 'a t -> 'a t = fun op nel ->
+  nel
+  |> to_list
+  |> List.sort op
+  |> of_list
+
+let max: ('a -> 'a -> int) -> 'a t -> 'a = fun op nel ->
+  match nel with
+  | Last a -> a
+  | Cons (hd, rest) -> fold_left (fun acc e -> if op acc e >= 0 then acc else e) hd nel
+
+let min: ('a -> 'a -> int) -> 'a t -> 'a = fun op nel ->
+  match nel with
+  | Last a -> a
+  | Cons (hd, rest) -> fold_left (fun acc e -> if op e acc >= 0 then acc else e) hd nel

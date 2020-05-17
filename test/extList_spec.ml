@@ -128,7 +128,7 @@ let max_test =
 
 let min_test =
   "min" >::: [
-    ("最大値を返す" >:: fun _ ->
+    ("最小値を返す" >:: fun _ ->
         assert_equal_intopt (Some 1) (min compare [1; 2; 3; 2; 2; 5; 4]) )
     ;
     ("空リストの場合 None を返す" >:: fun _ ->

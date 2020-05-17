@@ -78,9 +78,9 @@ let range: (int * int) -> int list = fun (bg, ed) ->
 let max: ('a -> 'a -> int) -> 'a list -> 'a option = fun op lst ->
   match lst with
   | [] -> None
-  | hd :: rest -> Some (List.fold_left (fun acc e -> if compare acc e >= 0 then acc else e) hd lst)
+  | hd :: rest -> Some (List.fold_left (fun acc e -> if op acc e >= 0 then acc else e) hd lst)
 
 let min: ('a -> 'a -> int) -> 'a list -> 'a option = fun op lst ->
   match lst with
   | [] -> None
-  | hd :: rest -> Some (List.fold_left (fun acc e -> if compare e acc >= 0 then acc else e) hd lst)
+  | hd :: rest -> Some (List.fold_left (fun acc e -> if op e acc >= 0 then acc else e) hd lst)
