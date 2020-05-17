@@ -110,14 +110,30 @@ let diff_test =
 
 let range_test =
   "range" >::: [
-      ("[bg, ed)のリストを作る" >::
-         fun _ -> assert_equal_intlist [2; 3; 4] (range (2, 5)))
+    ("[bg, ed)のリストを作る" >::
+       fun _ -> assert_equal_intlist [2; 3; 4] (range (2, 5)))
+  ;
+    ("(bg >= ed) の時、空リストが返る" >::
+       fun _ -> assert_equal_intlist [] (range (4, 2)))
+  ]
+
+let max_test =
+  "max" >::: [
+    ("最大値を返す" >:: fun _ ->
+        assert_equal_intopt (Some 5) (max compare [1; 2; 3; 2; 2; 5; 4]) )
     ;
-      ("(bg >= ed) の時、空リストが返る" >::
-         fun _ -> assert_equal_intlist [] (range (4, 2)))
-    ]
+    ("空リストの場合 None を返す" >:: fun _ ->
+        assert_equal_intopt None (max compare []) )
+  ]
 
-
+let min_test =
+  "min" >::: [
+    ("最大値を返す" >:: fun _ ->
+        assert_equal_intopt (Some 1) (min compare [1; 2; 3; 2; 2; 5; 4]) )
+    ;
+    ("空リストの場合 None を返す" >:: fun _ ->
+        assert_equal_intopt None (min compare []) )
+  ]
 
 
 let _ = run_test_tt_main begin
@@ -134,5 +150,7 @@ let _ = run_test_tt_main begin
       count_test;
       diff_test;
       range_test;
+      max_test;
+      min_test;
     ]
   end
