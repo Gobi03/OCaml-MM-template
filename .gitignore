@@ -1,7 +1,7 @@
 /src/submit.ml
 /tool/tmp/
 *.out
-.#*
+.vscode
 
 # OCaml
 *.annot
