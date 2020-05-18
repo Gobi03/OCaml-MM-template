@@ -5,7 +5,7 @@
 USE_OCAMLFIND = true
 
 FILES[] =
-	option
+	extOpt
 	nel
 	extList
 	extStr

@@ -8,7 +8,7 @@ USE_OCAMLFIND = true
 # Build an OCaml program
 FILES[] =
 	testUtil
-	option_spec
+	extOpt_spec
 	extList_spec
 	extStr_spec
 	extSet_spec

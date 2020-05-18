@@ -1,14 +1,7 @@
 open OUnit
 
 open TestUtil
-open Option
-
-
-let get_test =
-  "get" >::: [
-    ("Someの場合" >:: fun _ ->
-        assert_equal_int 42 (get @@ Some 42))
-  ]
+open ExtOpt
 
 let get_or_else_test =
   "get_or_else" >::: [
@@ -19,11 +12,8 @@ let get_or_else_test =
         assert_equal_int 42 (get_or_else 57 (Some 42)))
   ]
 
-
-
 let _ = run_test_tt_main begin
     "option.ml" >::: [
-      get_test;
       get_or_else_test
     ]
   end
