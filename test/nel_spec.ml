@@ -124,7 +124,7 @@ let find_test =
     ;
     ("条件にマッチする値が無い場合 None を返す" >:: fun _ ->
         assert_equal_intopt None (find (fun x -> x = 4) (of_list [1; 2; 3])) )
-    ]
+  ]
 
 let filter_test =
   "filter" >::: [

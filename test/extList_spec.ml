@@ -111,10 +111,10 @@ let diff_test =
 let range_test =
   "range" >::: [
     ("[bg, ed)のリストを作る" >::
-       fun _ -> assert_equal_intlist [2; 3; 4] (range (2, 5)))
-  ;
+     fun _ -> assert_equal_intlist [2; 3; 4] (range (2, 5)))
+    ;
     ("(bg >= ed) の時、空リストが返る" >::
-       fun _ -> assert_equal_intlist [] (range (4, 2)))
+     fun _ -> assert_equal_intlist [] (range (4, 2)))
   ]
 
 let max_test =

@@ -1,6 +1,6 @@
 # test/OMakefile
 
-.PHONY: all clean test
+.PHONY: all clean format test
 OCAMLINCLUDES += ../src
 
 USE_OCAMLFIND = true
@@ -31,6 +31,10 @@ all: $(OCamlProgram $(PROGRAM), $(FILES))
 clean:
 	find . -name "*.cm[ioxat]*" -o -name "*.out" -o -name "*.opt" -o -name "*.[ao]" \
 	| xargs $(RM)
+
+format:
+	find . -name "*.ml" -o -name "*.mli" \
+	| xargs ocp-indent -i
 
 test: all
 	./$(PROGRAM)

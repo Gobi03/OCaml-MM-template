@@ -20,20 +20,20 @@ module IntCoord = struct
 
   let set_matrix: coord -> 'a -> 'a array array -> unit = fun { x = x; y = y } ele matrix ->
     matrix.(y).(x) <- ele
-    
-  
+
+
   let (+): coord -> coord -> coord = fun {x=x1; y=y1} {x=x2; y=y2} ->
     { x = x1 + x2; y = y1 + y2 }
 
   let (-): coord -> coord -> coord = fun {x=x1; y=y1} {x=x2; y=y2} ->
     { x = x1 - x2; y = y1 - y2 }
 
-  
+
   let make_4dir: coord -> coord list = fun coord ->
     let delta =
       [ { x = 1; y = 0 }; { x = 0; y = 1 }; { x = -1; y = 0 }; { x = 0; y = -1 } ] in
     List.map ((+) coord) delta
-  
+
   let make_8dir: coord -> coord list = fun coord ->
     let delta =
       [ { x = 1; y = 0 }; { x = 1; y = 1 }; { x = 0; y = 1 }; { x = -1; y = 1 };
@@ -64,9 +64,9 @@ let get_distance: coord -> coord -> float = fun co1 co2 ->
   |> float
   |> sqrt
 
-let in_range: coord -> float -> < coord: coord; ..> -> bool =
+let in_range: coord -> float -> < coord: coord; ..> -> bool = 
   fun center range obje ->
-    get_distance center obje#coord <= range
+  get_distance center obje#coord <= range
 
 
 (** debug **)

@@ -51,8 +51,8 @@ let for_all: ('a -> bool) -> 'a t -> bool = fun p nel ->
 
 let exists: ('a -> bool) -> 'a t -> bool = fun p nel ->
   let rec func: 'a t -> bool = function
-  | Last e -> p e
-  | Cons (hd, rest) -> if p hd then true else func rest
+    | Last e -> p e
+    | Cons (hd, rest) -> if p hd then true else func rest
   in func nel
 
 

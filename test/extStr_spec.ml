@@ -4,9 +4,6 @@ open TestUtil
 open ExtStr
 
 
-
-
-
 let charlist_of_string_test =
   "charlist_of_string" >::: [
     ("文字列に変換できること" >:: fun _ ->

@@ -13,8 +13,8 @@ module IntSet = Set.Make (struct
 module ExtSet = S(IntSet)
 
 let set1 = ExtSet.(
-    of_list [1; 2; 3]
-  )
+      of_list [1; 2; 3]
+    )
 
 let to_list_spec =
   "to_list" >::: [
