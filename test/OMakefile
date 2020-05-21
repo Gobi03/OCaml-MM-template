@@ -34,7 +34,7 @@ clean:
 
 format:
 	find . -name "*.ml" -o -name "*.mli" \
-	| xargs ocp-indent -i
+	| xargs ocamlformat -i
 
 test: all
 	./$(PROGRAM)
