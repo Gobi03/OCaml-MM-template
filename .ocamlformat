@@ -1,0 +1,4 @@
+# disable = true
+margin = 100
+function-indent-nested = always
+space-around-lists = false
