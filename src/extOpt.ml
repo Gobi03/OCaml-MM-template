@@ -10,8 +10,8 @@ let fold: 'a -> ('b -> 'a) -> 'b option -> 'a = fun default f opt ->
 
 let list_flatten: 'a option list -> 'a list = fun lst ->
   lst
-  |> List.map (function None -> [] | Some x -> [x])
-  |> List.concat
+  |> List.fold_left (fun acc -> function None -> acc | Some e -> e :: acc) []
+  |> List.rev
 
 let show: ('a -> string) -> 'a option -> string = fun f -> function
   | None -> "None"
