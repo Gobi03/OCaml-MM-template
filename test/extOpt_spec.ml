@@ -20,6 +20,15 @@ let get_or_error_test =
     (* None の場合 *)
   ]
 
+let fold_test =
+  "fold" >::: [
+    ("Noneの場合" >:: fun _ ->
+        assert_equal_int 42 (fold 42 Fun.id None))
+    ;
+    ("Someの場合" >:: fun _ ->
+        assert_equal_int 42 (fold 57 ((+) 1) (Some 41)))
+  ]
+
 let list_flatten_test =
   "list_flatten" >::: [
     ("None は消され、Some の中身が残る" >:: fun _ ->
@@ -39,6 +48,7 @@ let _ = run_test_tt_main begin
     "option.ml" >::: [
       get_or_else_test;
       get_or_error_test;
+      fold_test;
       list_flatten_test;
       show_test;
     ]

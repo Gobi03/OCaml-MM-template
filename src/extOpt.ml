@@ -5,6 +5,9 @@ let get_or_error msg = function
   | None -> failwith msg
   | Some v -> v
 
+let fold: 'a -> ('b -> 'a) -> 'b option -> 'a = fun default f opt ->
+  Option.fold ~none:default ~some:f opt
+
 let list_flatten: 'a option list -> 'a list = fun lst ->
   lst
   |> List.map (function None -> [] | Some x -> [x])
