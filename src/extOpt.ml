@@ -1,6 +1,5 @@
-let get_or_else: 'a -> 'a option -> 'a = fun v -> function
-  | None -> v
-  | Some v -> v
+let get_or_else: 'a -> 'a option -> 'a = fun default opt -> 
+  Option.value opt ~default:default
 
 let get_or_error msg = function
   | None -> failwith msg
