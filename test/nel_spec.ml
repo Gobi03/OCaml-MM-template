@@ -113,6 +113,17 @@ let exists_test =
         assert_equal_bool false (exists (fun n -> n mod 2 = 0) @@ of_list [1; 3; 5]) )
   ]
 
+let contains_test =
+  "contains" >::: [
+    ("一部の要素が一致する場合" >:: fun _ ->
+        assert_equal_bool true (contains 2 @@ of_list [1; 2; 3]) )
+    ;
+    ("一致する要素がない場合" >:: fun _ ->
+        assert_equal_bool false (contains 7 @@ of_list [1; 2; 3]) )
+    ;
+    ("複数の要素が一致する場合" >:: fun _ ->
+        assert_equal_bool true (contains 2 @@ of_list [1; 2; 3; 2]) )
+  ]
 
 let find_test =
   "find" >::: [
@@ -199,6 +210,7 @@ let _ = run_test_tt_main begin
       map_test;
       for_all_test;
       exists_test;
+      contains_test;
       iter_test;
       find_test;
       filter_test;

@@ -55,6 +55,11 @@ let exists: ('a -> bool) -> 'a t -> bool = fun p nel ->
     | Cons (hd, rest) -> if p hd then true else func rest
   in func nel
 
+let contains: 'a -> 'a t -> bool = fun e nel ->
+  let rec func: 'a t -> bool = function
+    | Last last -> e = last
+    | Cons (hd, rest) -> if e = hd then true else func rest
+  in func nel
 
 (** searching **)
 (* 述語 p を満たす先頭の要素を返す *)
