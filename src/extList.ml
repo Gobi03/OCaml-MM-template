@@ -7,8 +7,7 @@ let is_empty: _ list -> bool = function
 let is_sublist: 'a list -> 'a list -> bool = fun l1 l2 ->
   List.for_all (fun ele -> List.mem ele l2) l1
 
-let contains: 'a -> 'a list -> bool = fun ele lst ->
-  List.exists (fun x -> x = ele) lst
+let contains: 'a -> 'a list -> bool = List.mem
 
 let hd_opt: 'a list -> 'a option = function
   | [] -> None
