@@ -83,3 +83,9 @@ let min: ('a -> 'a -> int) -> 'a list -> 'a option = fun op lst ->
   match lst with
   | [] -> None
   | hd :: rest -> Some (List.fold_left (fun acc e -> if op e acc >= 0 then acc else e) hd lst)
+
+let shuffle: 'a list -> 'a list = fun lst ->
+  lst
+  |> List.map (fun e -> (e, Random.bits ()))
+  |> List.sort (fun (_, a) (_, b) -> compare a b)
+  |> List.map fst
