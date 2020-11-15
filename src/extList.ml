@@ -21,6 +21,10 @@ let hd_or_error: string -> 'a list -> 'a = fun errmsg -> function
   | [] -> failwith errmsg
   | hd :: _ -> hd
 
+let hd_or_else_lazy: 'a Lazy.t -> 'a list -> 'a = fun default -> function
+  | [] -> Lazy.force default
+  | hd :: _ -> hd
+
 (* p に該当する最も先頭の値を返す *)
 let get_opt: ('a -> bool) -> 'a list -> 'a option = fun p lst ->
   List.fold_left (fun acc x -> if p x then Some x else acc) None (List.rev lst)

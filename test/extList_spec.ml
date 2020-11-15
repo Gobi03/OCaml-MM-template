@@ -57,6 +57,15 @@ let hd_or_else_test =
         assert_equal_int 42 (hd_or_else 42 []) )
   ]
 
+let hd_or_else_lazy_test =
+  "hd_or_else_lazy" >::: [
+    ("空リストでない場合先頭要素を返す" >:: fun _ ->
+        assert_equal_int 1 (hd_or_else_lazy (Lazy.from_fun @@ fun () -> 42) [1; 2; 3]) )
+    ;
+    ("空リストの場合デフォルト値を返す" >:: fun _ ->
+        assert_equal_int 42 (hd_or_else_lazy (Lazy.from_fun @@ fun () -> 42) []) )
+  ]
+
 let get_opt_test =
   "get_opt" >::: [
     ("p に該当する値を返す" >:: fun _ ->
@@ -149,6 +158,7 @@ let _ = run_test_tt_main begin
       contains_test;
       hd_opt_test;
       hd_or_else_test;
+      hd_or_else_lazy_test;
       get_opt_test;
       drop_test;
       drop_one_test;
