@@ -52,7 +52,8 @@ let int_of_str = int_of_string
 
 let rec power: int -> int -> int = fun x n ->
   match n with
-    1 -> x
+  | 0 -> 1
+  | 1 -> x
   | n' when n' mod 2 = 1 -> x * power (x * x) (n / 2)
   | n' -> power (x * x) (n / 2)
 
