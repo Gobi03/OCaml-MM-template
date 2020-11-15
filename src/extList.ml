@@ -43,6 +43,8 @@ let drop_one: ('a -> bool) -> 'a list -> 'a list = fun p lst ->
 let take_out: ('a -> bool) -> 'a list -> ('a option * 'a list) = fun p lst ->
   (get_opt p lst, drop_one p lst)
 
+let enumerate: 'a list -> (int * 'a) list = fun lst ->
+  List.mapi (fun i e -> (i, e)) lst
 
 let show: ('a -> string) -> 'a list -> string = fun show_elem lst ->
   lst

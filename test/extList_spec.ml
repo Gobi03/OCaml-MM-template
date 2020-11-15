@@ -94,7 +94,13 @@ let take_out_test =
     ;
     ("p に該当する値が複数ある場合、最も先頭の値を返す" >:: fun _ ->
         assert_equal_intoptintlist (Some 1, [2; 3]) (take_out (fun n -> n >= 0) [1; 2; 3]) )
-  ] 
+  ]
+
+let enumerate_test =
+  "enumerate" >::: [
+    ("index が付与される" >:: fun _ ->
+        assert_equal_intpairlist [(0, 1); (1, 3); (2, 4)] (enumerate [1; 3; 4]) )
+  ]
 
 let count_test =
   "count" >::: [
@@ -147,6 +153,7 @@ let _ = run_test_tt_main begin
       drop_test;
       drop_one_test;
       take_out_test;
+      enumerate_test;
       count_test;
       diff_test;
       range_test;
