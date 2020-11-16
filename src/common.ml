@@ -59,6 +59,29 @@ let rec power: int -> int -> int = fun x n ->
 
 let pow2 n = n * n
 
+(* perTime 毎にtimeoutを検査する *)
+(* @param _timeoutTime 稼働時間(milli seconds)
+   @param perTimes 時間計測する頻度
+*)
+class timeout_checker _timeoutTime perTimes =
+  object
+    val mutable loopCnt = 0
+    val mutable startTime = 0.0
+    val timeoutTime = _timeoutTime /. 1000.0
+
+    initializer
+      startTime <- Sys.time ()
+
+    method in_time: unit -> bool = fun () ->
+      loopCnt <- loopCnt + 1;
+      if loopCnt = perTimes then begin
+        loopCnt <- 0;
+        let nowTime = Sys.time () -. startTime in
+        nowTime < timeoutTime
+      end
+      else true
+  end
+
 (* for coord *)
 let get_distance: coord -> coord -> float = fun co1 co2 ->
   (pow2 @@ co1.x - co2.x) + (pow2 @@ co1.y - co2.y)
