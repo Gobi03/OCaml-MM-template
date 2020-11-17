@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 # ファイルバスを引数として渡す
-# e.g. "Red | Blue | Green"
+# e.g. ./make-show-from-file.py "${HOME}/tool/tmp/match.txt"
 
 import sys
 
@@ -16,8 +16,7 @@ com = int(input())
 if com < 1 or 2 < com:
     raise NameError("invalid command: " + str(com))
 
-try:
-    file = open(fileName)
+with open(fileName) as file:
     for line in file.readlines():
         line = line.strip(" |\n")
         right = line
@@ -25,5 +24,3 @@ try:
             right = const.upper()
         res = "  | " + line + " -> \"" + right + "\""
         print(res)
-finally:
-    file.close()
