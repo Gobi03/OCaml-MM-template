@@ -59,10 +59,14 @@ let rec power: int -> int -> int = fun x n ->
 
 let pow2 n = n * n
 
-(* perTime 毎にtimeoutを検査する *)
-(* @param _timeoutTime 稼働時間(milli seconds)
-   @param perTimes 時間計測する頻度
-*)
+(* return passed milli second 
+   @param startTime processor time, in seconds *)
+let get_now_time: float -> float = fun startTime ->
+  (Sys.time () -. startTime) *. 1000.0
+
+(* perTime 毎にtimeoutを検査する
+   @param _timeoutTime 稼働時間(milli seconds)
+   @param perTimes 時間計測する頻度 *)
 class timeout_checker _timeoutTime perTimes =
   object
     val mutable loopCnt = 0
