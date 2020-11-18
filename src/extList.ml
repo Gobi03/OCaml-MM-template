@@ -90,6 +90,9 @@ let min: ('a -> 'a -> int) -> 'a list -> 'a option = fun op lst ->
   | [] -> None
   | hd :: rest -> Some (List.fold_left (fun acc e -> if op e acc >= 0 then acc else e) hd lst)
 
+let sort_by_key: ('a -> 'b) -> 'a list -> 'a list = fun to_key lst ->
+  List.sort (fun e1 e2 -> compare (to_key e1) (to_key e2)) lst
+
 let shuffle: 'a list -> 'a list = fun lst ->
   lst
   |> List.map (fun e -> (e, Random.bits ()))

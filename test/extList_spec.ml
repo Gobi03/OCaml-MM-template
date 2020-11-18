@@ -150,6 +150,11 @@ let min_test =
         assert_equal_intopt None (min compare []) )
   ]
 
+let sort_by_key_test =
+  "sort_by_key" >::: [
+    ("条件を満たす要素は全て除去される" >:: fun _ ->
+        assert_equal_intpairlist [(3, 3); (2, 4); (1, 5)] (sort_by_key snd [(2,4); (1,5); (3,3)]) )
+  ]
 
 let _ = run_test_tt_main begin
     "extList.ml" >::: [
@@ -169,5 +174,6 @@ let _ = run_test_tt_main begin
       range_test;
       max_test;
       min_test;
+      sort_by_key_test;
     ]
   end
