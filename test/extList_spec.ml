@@ -111,6 +111,21 @@ let enumerate_test =
         assert_equal_intpairlist [(0, 1); (1, 3); (2, 4)] (enumerate [1; 3; 4]) )
   ]
 
+let fold_lefti_test =
+  "fold_lefti" >::: [
+    ("index 付きで fold_left を回せる" >:: fun _ ->
+        assert_equal_intlist [99; 42] (fold_lefti (fun i acc e -> if i mod 2 = 0 then e :: acc else acc) [] [42; 57; 99]) )
+  ]
+
+let slice_test =
+  "slice" >::: [
+    ("指定範囲の要素を残す" >:: fun _ ->
+        assert_equal_intlist [3; 5; 4] (slice (1, 4) [1; 3; 5; 4; 2]) )
+    ;
+    ("edがリストの長さを超えていたら、末尾までを返す" >:: fun _ ->
+        assert_equal_intlist [3; 5; 4; 2] (slice (1, 100) [1; 3; 5; 4; 2]) )
+  ]
+
 let count_test =
   "count" >::: [
     ("条件を満たす要素数を返す" >:: fun _ ->
@@ -169,6 +184,8 @@ let _ = run_test_tt_main begin
       drop_one_test;
       take_out_test;
       enumerate_test;
+      fold_lefti_test;
+      slice_test;
       count_test;
       diff_test;
       range_test;

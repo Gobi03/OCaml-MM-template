@@ -50,6 +50,20 @@ let take_out: ('a -> bool) -> 'a list -> ('a option * 'a list) = fun p lst ->
 let enumerate: 'a list -> (int * 'a) list = fun lst ->
   List.mapi (fun i e -> (i, e)) lst
 
+(* counting from 0 *)
+let fold_lefti: (int -> 'a -> 'b -> 'a) -> 'a -> 'b list -> 'a = fun f z lst ->
+  let rec func: int -> 'a -> 'b list -> 'a = fun cnt acc -> function
+    | [] -> acc
+    | hd :: rest -> func (cnt+1) (f cnt acc hd) rest
+  in func 0 z lst
+
+(* [bg, ed) の要素を返す。ed が長さより大きい場合は末尾までを返す。 *)
+let slice: int * int -> 'a list -> 'a list = fun (bg, ed) (lst: 'a list) ->
+  lst
+  |> fold_lefti (fun i acc e ->
+        if bg <= i && i < ed then e :: acc else acc) []
+  |> List.rev
+
 let show: ('a -> string) -> 'a list -> string = fun show_elem lst ->
   lst
   |> List.map show_elem
