@@ -3,6 +3,7 @@ open Printf
 
 
 let assert_equal_int = assert_equal ~printer:string_of_int
+let assert_equal_float = assert_equal ~printer:string_of_float
 let assert_equal_bool = assert_equal ~printer:string_of_bool
 let assert_equal_str = assert_equal ~printer:(fun s -> sprintf "\"%s\"" s)
 

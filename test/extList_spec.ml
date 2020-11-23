@@ -171,6 +171,45 @@ let sort_by_key_test =
         assert_equal_intpairlist [(3, 3); (2, 4); (1, 5)] (sort_by_key snd [(2,4); (1,5); (3,3)]) )
   ]
 
+let sum_int_test =
+  "sum_int" >::: [
+    ("条件を満たす要素は全て除去される" >:: fun _ ->
+        assert_equal_int 10 (sum_int [1; 2; 3; 4]) )
+    ;
+    ("空リストの場合0" >:: fun _ ->
+        assert_equal_int 0 (sum_int []) )
+  ]
+
+let sum_float_test =
+  "sum_int" >::: [
+    ("正常系" >:: fun _ ->
+        assert_equal_float 10. (sum_float [1.; 2.; 3.; 4.]) )
+    ;
+    ("空リストの場合0" >:: fun _ ->
+        assert_equal_float 0. (sum_float []) )
+  ]
+
+let sum_float_test =
+  "sum_int" >::: [
+    ("正常系" >:: fun _ ->
+        assert_equal_float 10. (sum_float [1.; 2.; 3.; 4.]) )
+    ;
+    ("空リストの場合0" >:: fun _ ->
+        assert_equal_float 0. (sum_float []) )
+  ]
+
+let avg_float_test =
+  "avg_float" >::: [
+    ("正常系" >:: fun _ ->
+        assert_equal_float 2.5 (avg_float [1.; 2.; 3.; 4.]) )
+  ]
+
+let standard_deviation_test =
+  "standard_deviation" >::: [
+    ("正常系" >:: fun _ ->
+        assert_equal_str "1.118" (Printf.sprintf "%.3f" (standard_deviation [1.; 2.; 3.; 4.])) )
+  ]
+
 let _ = run_test_tt_main begin
     "extList.ml" >::: [
       is_empty_test;
@@ -192,5 +231,9 @@ let _ = run_test_tt_main begin
       max_test;
       min_test;
       sort_by_key_test;
+      sum_int_test;
+      sum_float_test;
+      avg_float_test;
+      standard_deviation_test;
     ]
   end

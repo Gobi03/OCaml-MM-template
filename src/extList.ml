@@ -112,3 +112,18 @@ let shuffle: 'a list -> 'a list = fun lst ->
   |> List.map (fun e -> (e, Random.bits ()))
   |> List.sort (fun (_, a) (_, b) -> compare a b)
   |> List.map fst
+
+(* int list *)
+let sum_int: int list -> int = List.fold_left (+) 0
+
+(* float list *)
+let sum_float: float list -> float = List.fold_left (+.) 0.0
+let avg_float: float list -> float = fun lst ->
+  (sum_float lst) /. (float @@ List.length lst)
+
+(* 標準偏差 *)
+let standard_deviation: float list -> float = fun lst ->
+  let avg = avg_float lst in
+  let numer = List.fold_left (fun acc e -> 
+        acc +. Float.pow (e -. avg) 2.0) 0.0 lst in
+  Float.sqrt @@ numer /. (float @@ List.length lst)
