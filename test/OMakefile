@@ -11,6 +11,7 @@ FILES[] =
 	extOpt_spec
 	extList_spec
 	extStr_spec
+	priorityQueue_spec
 	extSet_spec
 	nel_spec
 

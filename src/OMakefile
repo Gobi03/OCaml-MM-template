@@ -9,6 +9,7 @@ FILES[] =
 	nel
 	extList
 	extStr
+	priorityQueue
 	extSet
 	common
 	entities
